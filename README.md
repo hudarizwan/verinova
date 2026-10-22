@@ -1,8 +1,28 @@
 # VeriNova
 
-VeriNova is an AI-powered fact-checking and evidence analysis platform designed to verify claims, assess the credibility of supporting sources, and produce explainable verification reports. It helps users check whether a statement is supported by credible evidence, whether it conflicts with known information, and how confident the system is in its conclusion.
+VeriNova is an AI-powered fact-checking and evidence analysis platform designed to verify claims, assess the credibility of supporting sources, and produce explainable verification reports. It helps users compare public evidence with a claim and produce a structured assessment rather than a simple yes/no answer.
 
-The project combines natural language processing, web retrieval, source reliability scoring, contradiction analysis, and report generation into a single workflow that can run from a terminal or a lightweight browser-based interface.
+The project combines natural language processing, web retrieval, source reliability scoring, contradiction analysis, and report generation into a single workflow that can run from a terminal or a browser interface.
+
+## System flow
+
+```mermaid
+flowchart TD
+    U[User input: claim, question, or headline] --> A[main.py / web_server.py]
+    A --> Q[query_processor.py]
+    Q --> N[nlp_pipeline.py]
+    N --> S[search_engine.py]
+    S --> W[web_scraper.py]
+    W --> E[evidence_extractor.py]
+    E --> C[credibility.py]
+    E --> D[contradiction_detector.py]
+    C --> V[verifier.py]
+    D --> V
+    V --> R[reporting.py]
+    V --> DB[(SQLite database)]
+    R --> H[History, analytics, exports]
+    R --> F[Verdict, confidence, citations]
+```
 
 ## What VeriNova does
 
@@ -209,4 +229,4 @@ python -m unittest discover tests
 
 ## Summary
 
-VeriNova is a practical fact-checking platform for claim verification, evidence analysis, and explainable AI-style reporting. It is built to feel like a usable product rather than a classroom-only demo, with a working CLI, browser interface, retrieval pipeline, reporting layer, and evaluation workflow all integrated into one system.
+VeriNova is a practical fact-checking platform for claim verification, evidence analysis, and explainable AI-style reporting. It is built to feel like a usable product rather than a classroom-only prototype and supports both local CLI usage and browser-based interaction.
